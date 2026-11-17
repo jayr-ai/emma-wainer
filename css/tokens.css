@@ -1,0 +1,52 @@
+/*
+  Brand tokens for Emma Wainer. Re-branding for another client means
+  editing this file only — no other CSS or JS should hard-code a color,
+  font or radius.
+*/
+:root {
+  /* Core palette (section 1A) */
+  --ink: #003E51;        /* Exmoor night — all text, used instead of black */
+  --green: #004E42;      /* Racing green — primary data color, links, active states */
+  --milky-tea: #EFDBC7;  /* chart tracks, tints, dividers, hover fills */
+  --cream: #F8F3EE;      /* page background, reversed text instead of white */
+  --copper: #EC8143;     /* single accent — underline, marker, call-out edge */
+  --gold: #F2BD88;       /* secondary highlight, thread line */
+  --navy: #001522;       /* dark end of the brand gradient */
+
+  /* Derived surface tokens */
+  --page-bg: var(--cream);
+  --card-bg: #FFFFFF;
+  --card-border: #EAD9C5;
+  --divider: var(--milky-tea);
+  --text: var(--ink);
+  --text-muted: #4F6A73; /* --ink at ~70% over cream, checked for 4.5:1 */
+
+  /* Status colors — always paired with an arrow glyph, never color alone */
+  --positive: var(--green);
+  --negative: #B4421F; /* deep brick */
+
+  /* Brand gradient — deep navy to teal to cool-grey, warm copper/gold glow
+     rising from the bottom-left. Used for the headline banner and
+     loading/empty-state backdrops only; never on small controls. */
+  --brand-gradient:
+    radial-gradient(120% 140% at 0% 110%, var(--copper) 0%, rgba(236, 129, 67, 0) 38%),
+    linear-gradient(160deg, var(--navy) 0%, var(--ink) 55%, var(--green) 100%);
+
+  /* Thread stroke gradient endpoints (used on the <linearGradient> in the banner) */
+  --thread-start: var(--copper);
+  --thread-end: var(--gold);
+
+  /* Typography */
+  --font-display: 'Nunito Sans', system-ui, sans-serif; /* headlines, KPI numbers, banner */
+  --font-body: 'Spartan', system-ui, sans-serif;         /* body copy, labels, tables, tooltips */
+
+  /* Radii & spacing */
+  --radius-card: 14px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 14px;
+  --space-4: 20px;
+  --space-5: 28px;
+}
