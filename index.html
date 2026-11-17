@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>LinkedIn performance · Emma Wainer</title>
+<meta name="description" content="LinkedIn content analytics for Emma Wainer." />
+
+<link rel="icon" href="assets/logos/favicon-32.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="assets/logos/apple-touch-icon.png" />
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="app" class="app">
+
+  <!-- Skeleton loading state, shown until the data file resolves -->
+  <div id="skeleton" class="skeleton" aria-hidden="true">
+    <div class="skeleton-header"></div>
+    <div class="skeleton-banner"></div>
+    <div class="skeleton-kpis">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+  </div>
+
+  <!-- Error state, shown only if the initial data load fails -->
+  <div id="error-state" class="error-state" hidden>
+    <p>We couldn't load the latest LinkedIn data.</p>
+    <button id="retry-button" type="button" class="btn btn-primary">Retry</button>
+  </div>
+
+  <main id="main" class="dashboard" hidden>
+
+    <header class="header">
+      <div class="header-brand">
+        <div class="logo-slot" aria-hidden="true">
+          <img src="assets/logos/ew-logo-horizontal-green.png" alt="" class="logo logo-light"
+               onerror="this.closest('.logo-slot').classList.add('logo-fallback')" />
+        </div>
+        <div class="header-titles">
+          <h1 class="page-title">LinkedIn performance</h1>
+          <p class="header-subtitle">Content analytics for Emma Wainer &middot; prepared by AZ Digital PH</p>
+        </div>
+      </div>
+
+      <div id="date-filter-root" class="date-filter-root"></div>
+    </header>
+
+    <section class="banner" aria-label="Summary for the selected period">
+      <svg class="banner-thread" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="thread-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="var(--thread-start)" />
+            <stop offset="100%" stop-color="var(--thread-end)" />
+          </linearGradient>
+        </defs>
+        <path d="M -20 150 C 150 40, 320 210, 480 90 S 780 10, 950 110 S 1180 170, 1240 60"
+              fill="none" stroke="url(#thread-gradient)" stroke-width="1.4" />
+      </svg>
+      <div class="banner-content">
+        <p id="banner-sentence" class="banner-sentence"></p>
+        <div class="banner-pills">
+          <span id="banner-best-format" class="pill pill-outline"></span>
+          <span id="banner-top-post" class="pill pill-outline"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="kpi-grid" class="kpi-grid" aria-label="Key metrics"></section>
+
+    <section class="trend-row">
+      <div class="card card-wide" aria-labelledby="daily-chart-title">
+        <div class="card-header">
+          <h2 id="daily-chart-title">Impressions per day</h2>
+          <div id="daily-chart-toggle" class="segmented segmented-sm" role="group" aria-label="Chart grouping"></div>
+        </div>
+        <div id="daily-chart" class="chart-slot"></div>
+      </div>
+      <div class="card" aria-labelledby="monthly-chart-title">
+        <div class="card-header">
+          <h2 id="monthly-chart-title">Median engagement rate by month</h2>
+        </div>
+        <p class="card-note">All time, per-post median</p>
+        <div id="monthly-chart" class="chart-slot"></div>
+      </div>
+    </section>
+
+    <section class="panel-row">
+      <div class="card" aria-labelledby="format-panel-title">
+        <h2 id="format-panel-title">What format works</h2>
+        <p class="card-note">Median engagement rate, posts in brackets</p>
+        <div id="format-panel" class="bar-list"></div>
+        <p class="card-footnote">Formats with fewer than 2 posts in the selected period are hidden.</p>
+      </div>
+      <div class="card" aria-labelledby="topic-panel-title">
+        <h2 id="topic-panel-title">Topic and objective</h2>
+        <p class="card-note">Reach against engagement</p>
+        <div id="topic-panel" class="stat-rows"></div>
+      </div>
+      <div class="card" aria-labelledby="rhythm-panel-title">
+        <h2 id="rhythm-panel-title">Posting rhythm</h2>
+        <p class="card-note">Last 6 weeks, Mon&ndash;Fri, shade = impressions</p>
+        <div id="rhythm-panel" class="rhythm-grid"></div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="top-posts-title">
+      <div class="card-header">
+        <h2 id="top-posts-title">Top posts</h2>
+        <div id="top-posts-controls" class="top-posts-controls"></div>
+      </div>
+      <div id="top-posts-table" class="table-scroll"></div>
+    </section>
+
+    <section class="panel-row panel-row-2">
+      <div class="card" aria-labelledby="funnel-title">
+        <h2 id="funnel-title">From attention to action</h2>
+        <p class="card-note">Selected period. Faded bars are not tracked yet.</p>
+        <div id="funnel-panel" class="bar-list"></div>
+      </div>
+      <div class="card" aria-labelledby="health-title">
+        <h2 id="health-title">Data health</h2>
+        <p class="card-note">How completely each metric is logged, across all data</p>
+        <div id="health-panel" class="bar-list bar-list-compact"></div>
+        <p id="health-callout" class="callout" hidden></p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span id="footer-source">Source: LinkedIn Blueprint System tracker</span>
+      <span class="footer-brand">
+        <img src="assets/logos/ew-submark-green.png" alt="" class="submark"
+             onerror="this.style.display='none'" />
+        Prepared by AZ Digital PH &middot; azdigitalph.com
+      </span>
+    </footer>
+  </main>
+
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
