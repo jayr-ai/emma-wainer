@@ -21,12 +21,16 @@ function renderMonthlyChart(container, { points, highlight }) {
     return;
   }
 
-  const width = 420;
-  const height = 220;
-  const marginLeft = 36;
-  const marginRight = 8;
-  const marginTop = 10;
-  const marginBottom = 26;
+  // Matches the daily chart's 760x170 viewBox ratio: when both cards land at
+  // the same rendered width, an SVG sized only by `width: 100%` takes its
+  // height from the viewBox's own aspect ratio, so mismatched ratios here
+  // made this chart render visibly taller than its sibling for no reason.
+  const width = 760;
+  const height = 170;
+  const marginLeft = 42;
+  const marginRight = 10;
+  const marginTop = 8;
+  const marginBottom = 22;
   const plotW = width - marginLeft - marginRight;
   const plotH = height - marginTop - marginBottom;
 

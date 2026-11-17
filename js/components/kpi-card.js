@@ -45,7 +45,7 @@ function renderKpiCard({ id, label, valueText, change, sparklineValues, tooltip 
     el('span', { class: 'kpi-value', text: valueText }),
     renderChangeRow(change),
     el('div', { class: 'kpi-spark' }, sparklineValues && sparklineValues.length
-      ? renderSparkline(sparklineValues)
+      ? renderSparkline(sparklineValues, { height: 24 })
       : null),
   ]);
 

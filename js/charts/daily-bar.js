@@ -30,11 +30,11 @@ function renderDailyChart(container, { points, grouping }) {
   }
 
   const width = 760;
-  const height = 250;
-  const marginLeft = 46;
+  const height = 170;
+  const marginLeft = 42;
   const marginRight = 8;
-  const marginTop = 10;
-  const marginBottom = 28;
+  const marginTop = 8;
+  const marginBottom = 22;
   const plotW = width - marginLeft - marginRight;
   const plotH = height - marginTop - marginBottom;
 
