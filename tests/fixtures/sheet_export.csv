@@ -1,0 +1,12 @@
+## Sheet name: Analytics 2026
+Impressions,Date,Hook / Title,Engagements,Format,Topic,Objective,New / Re-post,Profile Views,Follower gained,Video Watch Time,Average Watch time,Inbound Leads,Link,Eng. Rate
+500,"Nov 3, 2026",Hello world post,20,Image - Perosonal Image,Business,Trust,New,10,2,15m 56s,45s,0,http://example.com,4%
+300,2026-11-05,Second post,15,VIdeo - SF,Mix - general,Convert,Re-post,,,,17s,,,
+,2026-11-06,Missing impressions post,5,Text,Business,Trust,New,,,,,,,
+200,2026-11-07,Third post,abc,Carousel,Personal,Capture,New,,,,,,,
+## Sheet name: Chris
+Date,Impressions,Engagements,Hook / Title,Format
+2024-07-31,1226,71,Old benchmark post,Image - Photo
+## Sheet name: Analytics TEMPLATE
+Date,Impressions,Engagements,Hook / Title,Format
+2099-01-01,999,999,Should never appear,Text
