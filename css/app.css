@@ -1,18 +1,18 @@
 /* ---------- Fonts (self-hosted, see assets/fonts/) ---------- */
 @font-face {
-  font-family: 'Nunito Sans';
-  src: url('../assets/fonts/nunito-sans-variable.woff2') format('woff2-variations'),
-       url('../assets/fonts/nunito-sans-variable.woff2') format('woff2');
-  font-weight: 400 600;
+  font-family: 'Fraunces';
+  src: url('../assets/fonts/fraunces-variable.woff2') format('woff2-variations'),
+       url('../assets/fonts/fraunces-variable.woff2') format('woff2');
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Spartan';
-  src: url('../assets/fonts/league-spartan-variable.woff2') format('woff2-variations'),
-       url('../assets/fonts/league-spartan-variable.woff2') format('woff2');
-  font-weight: 400 600;
+  font-family: 'Manrope';
+  src: url('../assets/fonts/manrope-variable.woff2') format('woff2-variations'),
+       url('../assets/fonts/manrope-variable.woff2') format('woff2');
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
@@ -39,7 +39,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; }
   left: -999px;
   top: 0;
   background: var(--ink);
-  color: var(--cream);
+  color: var(--on-primary);
   padding: 10px 16px;
   border-radius: 0 0 8px 0;
   z-index: 100;
@@ -125,9 +125,22 @@ button {
 
 .header-brand { display: flex; align-items: center; gap: 14px; }
 
-.logo-slot { display: flex; align-items: center; }
-.logo { height: 32px; display: block; }
-.logo-slot.logo-fallback { display: none; }
+.logo-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--green);
+  color: var(--on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
 
 .header-titles { display: flex; flex-direction: column; gap: 2px; }
 .page-title { font-size: 26px; line-height: 1.15; }
@@ -167,7 +180,7 @@ button {
 .segmented-sm button { height: 32px; padding: 0 10px; font-size: 12px; }
 .segmented button[aria-pressed="true"] {
   background: var(--green);
-  color: var(--cream);
+  color: var(--on-primary);
 }
 
 .btn {
@@ -183,7 +196,7 @@ button {
   color: var(--text);
   cursor: pointer;
 }
-.btn-primary { background: var(--green); color: var(--cream); border-color: var(--green); }
+.btn-primary { background: var(--green); color: var(--on-primary); border-color: var(--green); }
 .btn-icon { width: 44px; justify-content: center; padding: 0; }
 
 .checkbox-label {
@@ -244,7 +257,7 @@ button {
 }
 .calendar-day:disabled { color: var(--card-border); cursor: not-allowed; }
 .calendar-day.in-range { background: var(--milky-tea); }
-.calendar-day.is-endpoint { background: var(--green); color: var(--cream); font-weight: 600; }
+.calendar-day.is-endpoint { background: var(--green); color: var(--on-primary); font-weight: 600; }
 .calendar-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
 /* ---------- Banner ---------- */
@@ -253,17 +266,9 @@ button {
   overflow: hidden;
   border-radius: 18px;
   padding: 28px;
-  background: var(--brand-gradient);
-  color: var(--cream);
+  background: var(--green);
+  color: var(--on-primary);
 }
-.banner-thread {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.55;
-}
-@media (prefers-reduced-motion: no-preference) { }
 .banner-content {
   position: relative;
   display: flex;
@@ -287,7 +292,7 @@ button {
   border-radius: var(--radius-pill);
   font-size: 13px;
 }
-.pill-outline { border: 1px solid rgba(248, 243, 238, 0.45); }
+.pill-outline { border: 1px solid rgba(255, 255, 255, 0.4); }
 
 /* ---------- KPI grid ---------- */
 .kpi-grid {
@@ -479,7 +484,7 @@ table.data-table {
   z-index: 30;
   max-width: 260px;
   background: var(--ink);
-  color: var(--cream);
+  color: var(--on-primary);
   border-radius: 8px;
   padding: 8px 10px;
   font-size: 12px;
@@ -491,7 +496,7 @@ table.data-table {
 .toast-region { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 40; }
 .toast {
   background: var(--ink);
-  color: var(--cream);
+  color: var(--on-primary);
   padding: 12px 16px;
   border-radius: 10px;
   font-size: 13px;
@@ -517,7 +522,6 @@ table.data-table {
   border-top: 1px solid var(--divider);
 }
 .footer-brand { display: flex; align-items: center; gap: 8px; }
-.submark { height: 22px; display: block; }
 
 /* ---------- Skeleton ---------- */
 .skeleton { max-width: 1360px; margin: 0 auto; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
@@ -565,5 +569,4 @@ table.data-table {
   .top-posts-controls, .show-more-row { display: none !important; }
   .dashboard { padding: 0; gap: 12px; }
   .card, .banner, .kpi-card { break-inside: avoid; page-break-inside: avoid; }
-  .banner-thread { display: none; }
 }

@@ -24,27 +24,21 @@ Both suites run against frozen fixtures (`tests/fixtures/`), not the live data
 file, so they stay stable as the Sheet sync updates `data/linkedin_posts.json`
 over time.
 
+## Design
+
+The dashboard currently ships with the **generic look from the layout
+reference** (`reference/layout-reference.html`) — Fraunces + Manrope, the
+teal/orange/cream palette, a solid banner, a plain "CLIENT LOGO" placeholder
+in the header — rather than a specific client's brand system. All of it lives
+in `css/tokens.css`; swapping in a real client's colors, fonts and logo later
+is a matter of editing that one file plus the logo markup in `index.html`
+(currently a styled placeholder `<div class="logo-placeholder">`, no `<img>`).
+
 ## What's still needed from you
 
-1. **Logo files.** `data/` and `reference/` were supplied, but the seven brand
-   logo PNGs (`ew-logo-horizontal-green.png`, `ew-submark-green.png`, etc.)
-   were not available when this was built, so the dashboard currently runs
-   with the logo slots empty (the header and footer just show the title
-   text). Drop the real files into `assets/logos/` using the exact filenames
-   below and they'll appear automatically — no code changes needed:
-   - `ew-logo-stacked-green.png`, `ew-logo-stacked-cream.png`
-   - `ew-logo-horizontal-green.png`, `ew-logo-horizontal-cream.png`
-   - `ew-submark-green.png`, `ew-submark-cream.png`
-   - `ew-submark-gradient.png` (also used for the favicon/apple-touch-icon —
-     see the icon step below)
-2. **Favicon/apple-touch-icon exports.** Once you have `ew-submark-gradient.png`,
-   export it at 32×32, 180×180 and 512×512px and save them as
-   `assets/logos/favicon-32.png`, `assets/logos/apple-touch-icon.png` and a
-   512px version for the social preview card. `index.html` already links to
-   the 32px and apple-touch sizes.
-3. **Google Sheet access** (see the one-time setup below) — needed before the
+1. **Google Sheet access** (see the one-time setup below) — needed before the
    automatic sync will work.
-4. **DNS for the custom domain** (see below).
+2. **DNS for the custom domain** (see below).
 
 ## Deploying to GitHub Pages
 
@@ -170,7 +164,7 @@ scripts/sync_sheet.py Google Sheet → data/linkedin_posts.json + data/meta.json
   own approach. This kept the page lighter and avoided vendoring a dependency
   for what turned out to be a handful of simple shapes.
 - **Fonts** are self-hosted as variable WOFF2 files in `assets/fonts/`
-  (Nunito Sans and League Spartan, downloaded from Google Fonts and committed
-  directly — no runtime Google Fonts request).
+  (Fraunces and Manrope, matching the layout reference, downloaded from
+  Google Fonts and committed directly — no runtime Google Fonts request).
 - Every number on the page is computed client-side from `data/linkedin_posts.json`
   for whatever date range is selected — nothing is pre-aggregated.
