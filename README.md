@@ -26,12 +26,12 @@ over time.
 
 ## Design
 
-The dashboard currently ships with the **generic look from the layout
-reference** (`reference/layout-reference.html`) — Fraunces + Manrope, the
-teal/orange/cream palette, a solid banner, a plain "CLIENT LOGO" placeholder
-in the header — rather than a specific client's brand system. All of it lives
-in `css/tokens.css`; swapping in a real client's colors, fonts and logo later
-is a matter of editing that one file plus the logo markup in `index.html`
+The dashboard uses a clean, modern SaaS-dashboard look — Inter, a light-grey
+canvas with white cards (subtle border + shadow), a coral/orange accent for
+bars/lines/active controls, and a plain "CLIENT LOGO" placeholder in the
+header — rather than a specific client's brand system. All of it lives in
+`css/tokens.css`; swapping in a real client's colors, fonts and logo later is
+a matter of editing that one file plus the logo markup in `index.html`
 (currently a styled placeholder `<div class="logo-placeholder">`, no `<img>`).
 
 ## What's still needed from you
@@ -163,8 +163,8 @@ scripts/sync_sheet.py Google Sheet → data/linkedin_posts.json + data/meta.json
   grid) are hand-rolled inline SVG instead, matching the reference mockup's
   own approach. This kept the page lighter and avoided vendoring a dependency
   for what turned out to be a handful of simple shapes.
-- **Fonts** are self-hosted as variable WOFF2 files in `assets/fonts/`
-  (Fraunces and Manrope, matching the layout reference, downloaded from
-  Google Fonts and committed directly — no runtime Google Fonts request).
+- **Fonts** are self-hosted as a variable WOFF2 file in `assets/fonts/`
+  (Inter, downloaded from Google Fonts and committed directly — no runtime
+  Google Fonts request).
 - Every number on the page is computed client-side from `data/linkedin_posts.json`
   for whatever date range is selected — nothing is pre-aggregated.

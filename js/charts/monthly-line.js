@@ -65,13 +65,34 @@ function renderMonthlyChart(container, { points, highlight }) {
     svg.appendChild(svgEl('text', { x: marginLeft - 6, y: y + 4, 'text-anchor': 'end', class: 'axis-label', text: `${(t * 100).toFixed(0)}%` }));
   }
 
-  let pathData = '';
+  // Build the line (and the filled area under it) from contiguous runs of
+  // non-null points, so a gap in the data breaks the shape rather than
+  // drawing a false connecting segment.
+  const baselineY = marginTop + plotH;
+  let linePath = '';
+  let areaPath = '';
+  let runStartX = null;
   points.forEach((p, i) => {
-    if (p.medianRate === null) return;
-    const cmd = pathData === '' ? 'M' : 'L';
-    pathData += `${cmd}${xFor(i).toFixed(1)},${yFor(p.medianRate).toFixed(1)} `;
+    if (p.medianRate === null) {
+      runStartX = null;
+      return;
+    }
+    const x = xFor(i).toFixed(1);
+    const y = yFor(p.medianRate).toFixed(1);
+    if (runStartX === null) {
+      linePath += `M${x},${y} `;
+      areaPath += `M${x},${baselineY} L${x},${y} `;
+      runStartX = x;
+    } else {
+      linePath += `L${x},${y} `;
+      areaPath += `L${x},${y} `;
+    }
+    if (i === points.length - 1 || points[i + 1]?.medianRate === null) {
+      areaPath += `L${x},${baselineY} Z `;
+    }
   });
-  svg.appendChild(svgEl('path', { d: pathData.trim(), class: 'trend-line' }));
+  svg.appendChild(svgEl('path', { d: areaPath.trim(), class: 'trend-area' }));
+  svg.appendChild(svgEl('path', { d: linePath.trim(), class: 'trend-line' }));
 
   const labelEvery = Math.max(1, Math.ceil(n / 7));
   points.forEach((p, i) => {
@@ -81,7 +102,8 @@ function renderMonthlyChart(container, { points, highlight }) {
     attachTooltip(dot, () => `${monthLabel(p.month)}: ${(p.medianRate * 100).toFixed(1)}% median engagement rate`);
 
     if (i % labelEvery === 0 || i === n - 1) {
-      svg.appendChild(svgEl('text', { x: xFor(i).toFixed(1), y: height - 6, 'text-anchor': 'middle', class: 'axis-label', text: monthLabel(p.month) }));
+      const anchor = i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle';
+      svg.appendChild(svgEl('text', { x: xFor(i).toFixed(1), y: height - 6, 'text-anchor': anchor, class: 'axis-label', text: monthLabel(p.month) }));
     }
   });
 

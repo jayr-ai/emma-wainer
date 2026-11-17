@@ -33,7 +33,7 @@ function renderSparkline(values, { width = 150, height = 36 } = {}) {
   svg.appendChild(svgEl('polyline', {
     points: points.join(' '),
     fill: 'none',
-    stroke: 'var(--green)',
+    stroke: 'var(--accent)',
     'stroke-width': '2',
     'stroke-linejoin': 'round',
     'stroke-linecap': 'round',

@@ -1,44 +1,43 @@
 /*
-  Design tokens for the dashboard. This is the generic look from the
-  layout reference mockup (reference/layout-reference.html) — no client
-  brand system applied. Re-skinning for a specific client's brand means
-  editing this file only.
+  Design tokens for the dashboard. Styled after a clean, modern SaaS
+  dashboard look (light-grey canvas, white cards, Inter, a coral/orange
+  accent) rather than a specific client brand system. Re-skinning this
+  dashboard for a client's brand later means editing this file only.
 */
 :root {
-  /* Core palette (from reference/layout-reference.html) */
-  --ink: #16222A;        /* primary text and headings */
-  --green: #0E4F5C;      /* primary color — banner, active controls, bars/lines */
-  --milky-tea: #E9E5DB;  /* chart tracks, tints, dividers, hover fills */
-  --cream: #F4F1EA;      /* page background */
-  --copper: #E4572E;     /* single accent — underline, marker, call-out edge */
-  --gold: #E4572E;       /* secondary highlight (same as accent in this theme) */
-  --navy: #0E4F5C;       /* kept for compatibility; this theme has no separate dark end */
+  /* Core palette */
+  --ink: #16181D;        /* primary text and headings */
+  --accent: #EF5A33;     /* primary accent — bars, lines, active controls, links */
+  --accent-strong: #D6491F; /* hover/focus state for accent-filled elements */
+  --accent-tint: rgba(239, 90, 51, 0.09); /* light accent wash for highlights/callouts */
+  --milky-tea: #F0F0F2;  /* chart tracks, tints, hover fills */
+  --cream: #F7F7F8;      /* page background */
+  --card-bg: #FFFFFF;
+  --card-border: #E7E7EA;
 
   /* Derived surface tokens */
   --page-bg: var(--cream);
-  --card-bg: #FFFFFF;
-  --card-border: #DDD8CC;
-  --divider: #DDD8CC;
+  --divider: var(--card-border);
   --text: var(--ink);
-  --text-muted: #5A676F;
+  --text-muted: #6B7280;
 
   /* Status colors — always paired with an arrow glyph, never color alone */
-  --positive: #1B7A4B;
-  --negative: #B4421F;
+  --positive: #16A34A;
+  --negative: #DC2626;
 
-  /* Text/controls drawn on top of the primary color (buttons, banner) */
+  /* Text/controls drawn on top of the accent color (buttons, active states) */
   --on-primary: #FFFFFF;
 
-  /* Banner background — solid, no gradient, no decorative thread in this theme */
-  --brand-gradient: var(--green);
+  /* Card shadow, used sparingly for a bit of depth over the grey canvas */
+  --card-shadow: 0 1px 2px rgba(17, 17, 20, 0.04), 0 1px 1px rgba(17, 17, 20, 0.03);
 
   /* Typography */
-  --font-display: 'Fraunces', Georgia, serif;  /* headlines, KPI numbers, banner */
-  --font-body: 'Manrope', system-ui, sans-serif; /* body copy, labels, tables, tooltips */
+  --font-display: 'Inter', system-ui, sans-serif; /* headlines, KPI numbers */
+  --font-body: 'Inter', system-ui, sans-serif;    /* body copy, labels, tables, tooltips */
 
   /* Radii & spacing */
-  --radius-card: 14px;
-  --radius-control: 12px;
+  --radius-card: 12px;
+  --radius-control: 10px;
   --radius-pill: 999px;
   --space-1: 4px;
   --space-2: 8px;
