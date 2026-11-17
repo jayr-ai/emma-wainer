@@ -62,7 +62,7 @@ function renderMonthlyChart(container, { points, highlight }) {
   for (const t of ticks) {
     const y = yFor(t);
     svg.appendChild(svgEl('line', { x1: marginLeft, x2: width - marginRight, y1: y, y2: y, class: 'gridline' }));
-    svg.appendChild(svgEl('text', { x: marginLeft - 6, y: y + 4, 'text-anchor': 'end', class: 'axis-label' }, el('tspan', { text: `${(t * 100).toFixed(0)}%` })));
+    svg.appendChild(svgEl('text', { x: marginLeft - 6, y: y + 4, 'text-anchor': 'end', class: 'axis-label', text: `${(t * 100).toFixed(0)}%` }));
   }
 
   let pathData = '';
@@ -81,7 +81,7 @@ function renderMonthlyChart(container, { points, highlight }) {
     attachTooltip(dot, () => `${monthLabel(p.month)}: ${(p.medianRate * 100).toFixed(1)}% median engagement rate`);
 
     if (i % labelEvery === 0 || i === n - 1) {
-      svg.appendChild(svgEl('text', { x: xFor(i).toFixed(1), y: height - 6, 'text-anchor': 'middle', class: 'axis-label' }, el('tspan', { text: monthLabel(p.month) })));
+      svg.appendChild(svgEl('text', { x: xFor(i).toFixed(1), y: height - 6, 'text-anchor': 'middle', class: 'axis-label', text: monthLabel(p.month) }));
     }
   });
 

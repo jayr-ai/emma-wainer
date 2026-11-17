@@ -38,15 +38,23 @@ function replaceChildren(node, children) {
   }
 }
 
-// Minimal SVG element helper (SVG needs createElementNS).
+// Minimal SVG element helper (SVG needs createElementNS). `text` sets
+// textContent directly — SVG has no HTMLElement.innerText/className
+// shortcuts, and a plain-HTML <tspan> (e.g. from `el()`) is invalid inside
+// an SVG <text> node and silently fails to render, so never nest one here.
 function svgEl(tag, attrs = {}, children = []) {
   const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [key, value] of Object.entries(attrs)) {
     if (value === null || value === undefined) continue;
-    node.setAttribute(key, value);
+    if (key === 'text') {
+      node.textContent = value;
+    } else {
+      node.setAttribute(key, value);
+    }
   }
   for (const child of Array.isArray(children) ? children : [children]) {
-    if (child) node.appendChild(child);
+    if (child === null || child === undefined) continue;
+    node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
   }
   return node;
 }

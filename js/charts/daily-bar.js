@@ -52,7 +52,7 @@ function renderDailyChart(container, { points, grouping }) {
   for (const t of ticks) {
     const y = marginTop + plotH - (t / axisMax) * plotH;
     svg.appendChild(svgEl('line', { x1: marginLeft, x2: width - marginRight, y1: y, y2: y, class: 'gridline' }));
-    svg.appendChild(svgEl('text', { x: marginLeft - 8, y: y + 4, 'text-anchor': 'end', class: 'axis-label' }, el('tspan', { text: formatCompact(t) })));
+    svg.appendChild(svgEl('text', { x: marginLeft - 8, y: y + 4, 'text-anchor': 'end', class: 'axis-label', text: formatCompact(t) }));
   }
 
   const slot = plotW / points.length;
@@ -78,7 +78,8 @@ function renderDailyChart(container, { points, grouping }) {
     if (i % labelEvery === 0 || i === points.length - 1) {
       svg.appendChild(svgEl('text', {
         x: (marginLeft + i * slot + slot / 2).toFixed(1), y: height - 8, 'text-anchor': 'middle', class: 'axis-label',
-      }, el('tspan', { text: axisLabelFor(point, grouping) })));
+        text: axisLabelFor(point, grouping),
+      }));
     }
   });
 
