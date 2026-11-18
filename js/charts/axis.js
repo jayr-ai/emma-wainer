@@ -24,6 +24,14 @@ function niceTicks(max, targetCount = 4) {
   const step = niceStep(max, targetCount);
   const ticks = [];
   for (let v = 0; v <= max + step * 0.001; v += step) ticks.push(Math.round(v * 100) / 100);
+  // The loop above stops as soon as a tick passes max, which can leave the
+  // last tick just short of it (e.g. max 5.77 with a step of 2 stops at 4).
+  // Callers use the last tick as the axis ceiling, so a value sitting in
+  // that gap would plot above the chart and get clipped — always make sure
+  // the ticks actually cover max.
+  if (ticks[ticks.length - 1] < max) {
+    ticks.push(Math.round((ticks[ticks.length - 1] + step) * 100) / 100);
+  }
   return ticks;
 }
 
