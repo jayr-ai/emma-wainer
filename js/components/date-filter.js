@@ -1,7 +1,26 @@
 // The date filter: presets, a two-month calendar popover for custom ranges,
 // a compare checkbox and a refresh button. Fully keyboard operable.
 
-import { el, clear } from './dom.js';
+import { el, clear, svgEl } from './dom.js';
+
+function refreshIcon() {
+  return svgEl('svg', {
+    viewBox: '0 0 24 24',
+    width: '18',
+    height: '18',
+    fill: 'none',
+    stroke: 'currentColor',
+    'stroke-width': '2.25',
+    'stroke-linecap': 'round',
+    'stroke-linejoin': 'round',
+    'aria-hidden': 'true',
+    focusable: 'false',
+  }, [
+    svgEl('polyline', { points: '23 4 23 10 17 10' }),
+    svgEl('polyline', { points: '1 20 1 14 7 14' }),
+    svgEl('path', { d: 'M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15' }),
+  ]);
+}
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const PRESETS = [
@@ -328,7 +347,7 @@ function createDateFilter(container, { bounds, initialState, onChange, onRefresh
       'aria-label': 'Refresh data. New data is checked automatically.',
       title: 'Refresh data',
       onClick: () => onRefresh && onRefresh(),
-    }, '⟳');
+    }, refreshIcon());
 
     container.append(presetGroup, rangeButton, compareLabel, refreshButton);
     renderPopover();
