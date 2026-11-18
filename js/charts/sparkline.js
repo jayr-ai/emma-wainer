@@ -1,4 +1,5 @@
 import { svgEl } from '../components/dom.js';
+import { smoothLinePath } from './smooth-path.js';
 
 /**
  * A small decorative trend line for a KPI card. Decorative because the
@@ -27,14 +28,14 @@ function renderSparkline(values, { width = 150, height = 36 } = {}) {
   const points = values.map((v, i) => {
     const x = pad + (values.length === 1 ? usableW / 2 : (i / (values.length - 1)) * usableW);
     const y = pad + usableH - ((v - min) / range) * usableH;
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
+    return { x: Number(x.toFixed(1)), y: Number(y.toFixed(1)) };
   });
 
-  svg.appendChild(svgEl('polyline', {
-    points: points.join(' '),
+  svg.appendChild(svgEl('path', {
+    d: smoothLinePath(points),
     fill: 'none',
     stroke: 'var(--accent)',
-    'stroke-width': '2',
+    'stroke-width': '1.5',
     'stroke-linejoin': 'round',
     'stroke-linecap': 'round',
   }));

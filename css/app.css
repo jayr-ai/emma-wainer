@@ -366,7 +366,7 @@ button {
 .chart-slot .bar { fill: var(--accent); cursor: pointer; }
 .chart-slot .bar:hover, .chart-slot .bar:focus { fill: var(--accent-strong); }
 .chart-slot .trend-area { fill: var(--accent-tint); }
-.chart-slot .trend-line { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+.chart-slot .trend-line { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
 .chart-slot .trend-dot { fill: var(--card-bg); stroke: var(--accent); stroke-width: 2; cursor: pointer; }
 .chart-slot .trend-band { fill: var(--milky-tea); opacity: 0.7; }
 

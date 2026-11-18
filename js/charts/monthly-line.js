@@ -1,6 +1,7 @@
 import { el, clear, svgEl } from '../components/dom.js';
 import { attachTooltip } from '../components/tooltip.js';
 import { niceTicks } from './axis.js';
+import { smoothLinePath } from './smooth-path.js';
 
 function monthLabel(monthKey) {
   const date = new Date(`${monthKey}-01T00:00:00Z`);
@@ -71,32 +72,30 @@ function renderMonthlyChart(container, { points, highlight }) {
 
   // Build the line (and the filled area under it) from contiguous runs of
   // non-null points, so a gap in the data breaks the shape rather than
-  // drawing a false connecting segment.
+  // drawing a false connecting segment. Each run is smoothed into a Catmull-
+  // Rom curve instead of straight segments, for a softer, flowing line.
   const baselineY = marginTop + plotH;
-  let linePath = '';
-  let areaPath = '';
-  let runStartX = null;
+  const runs = [];
+  let currentRun = null;
   points.forEach((p, i) => {
     if (p.medianRate === null) {
-      runStartX = null;
+      currentRun = null;
       return;
     }
-    const x = xFor(i).toFixed(1);
-    const y = yFor(p.medianRate).toFixed(1);
-    if (runStartX === null) {
-      linePath += `M${x},${y} `;
-      areaPath += `M${x},${baselineY} L${x},${y} `;
-      runStartX = x;
-    } else {
-      linePath += `L${x},${y} `;
-      areaPath += `L${x},${y} `;
+    const run = { x: Number(xFor(i).toFixed(1)), y: Number(yFor(p.medianRate).toFixed(1)) };
+    if (!currentRun) {
+      currentRun = [];
+      runs.push(currentRun);
     }
-    if (i === points.length - 1 || points[i + 1]?.medianRate === null) {
-      areaPath += `L${x},${baselineY} Z `;
-    }
+    currentRun.push(run);
   });
-  svg.appendChild(svgEl('path', { d: areaPath.trim(), class: 'trend-area' }));
-  svg.appendChild(svgEl('path', { d: linePath.trim(), class: 'trend-line' }));
+
+  const linePath = runs.map((run) => smoothLinePath(run)).join(' ');
+  const areaPath = runs
+    .map((run) => `${smoothLinePath(run)} L${run[run.length - 1].x},${baselineY} L${run[0].x},${baselineY} Z`)
+    .join(' ');
+  svg.appendChild(svgEl('path', { d: areaPath, class: 'trend-area' }));
+  svg.appendChild(svgEl('path', { d: linePath, class: 'trend-line' }));
 
   const labelEvery = Math.max(1, Math.ceil(n / 7));
   points.forEach((p, i) => {
