@@ -34,7 +34,7 @@ function renderSparkline(values, { width = 150, height = 36 } = {}) {
   svg.appendChild(svgEl('path', {
     d: smoothLinePath(points),
     fill: 'none',
-    stroke: 'var(--accent)',
+    stroke: 'var(--brand-milky-tea-strong)',
     'stroke-width': '1.5',
     'stroke-linejoin': 'round',
     'stroke-linecap': 'round',

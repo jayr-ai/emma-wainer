@@ -15,6 +15,10 @@
   --card-bg: #FFFFFF;
   --card-border: #E7E7EA;
 
+  /* Emma Wainer brand color — Pantone 9185 "Milky Tea" */
+  --brand-milky-tea: #EFDBC7;        /* bar graphs */
+  --brand-milky-tea-strong: #D7C3AF; /* sparklines; hover/focus state for bar graphs — the base tone reads too faint for a 1.5px line on a white card */
+
   /* Derived surface tokens */
   --page-bg: var(--cream);
   --divider: var(--card-border);
