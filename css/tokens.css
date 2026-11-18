@@ -7,9 +7,9 @@
 :root {
   /* Core palette */
   --ink: #16181D;        /* primary text and headings */
-  --accent: #EF5A33;     /* primary accent — bars, lines, active controls, links */
-  --accent-strong: #D6491F; /* hover/focus state for accent-filled elements */
-  --accent-tint: rgba(239, 90, 51, 0.09); /* light accent wash for highlights/callouts */
+  --accent: #D97E4A;     /* primary accent — bars, lines, active controls, links */
+  --accent-strong: #B86B3F; /* hover/focus state for accent-filled elements */
+  --accent-tint: rgba(217, 126, 74, 0.09); /* light accent wash for highlights/callouts */
   --milky-tea: #F0F0F2;  /* chart tracks, tints, hover fills */
   --cream: #F7F7F8;      /* page background */
   --card-bg: #FFFFFF;
